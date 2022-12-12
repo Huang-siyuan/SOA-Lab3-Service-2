@@ -1,0 +1,35 @@
+server:
+  port: 3344
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Huang-siyuan/SOAConfigServer.git
+          default-label: main
+          search-paths:
+            - SOAConfigServer
+          username: Huang-siyuan
+          password: 657248hsy
+# Example:
+#  /label(Branch name)/application.name-profile.yml
+#  http://localhost:3344/main/cloud-config-center-application.yml
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: cloud-config-${server.port}
+
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
